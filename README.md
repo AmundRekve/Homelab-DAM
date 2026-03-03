@@ -8,18 +8,14 @@ In this git repo, I will be showing the projects I have going on at home. The co
 # This is what I currently run on my homelab
 
 
-* Kubernetes
-- Controller and 3 worker nodes
+* Kubernetes - Controller and 3 worker nodes
 
-* WireGuard
-- To connect to my environment from anywhere
+* WireGuard - To connect to my environment from anywhere
 
-* Pulse
-- To monitor my containers and vm's outside of Kubernetes
+* Pulse - To monitor my containers and vm's outside of Kubernetes
 
-* NextCloud
-- A selfhosted dropbox to send things from my phone to my home or computer
-
+* NextCloud - A selfhosted dropbox to send things from my phone to my home or computer
+ 
 
 
 
