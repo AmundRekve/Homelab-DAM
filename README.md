@@ -104,7 +104,7 @@ Configuration can be found in the [`/kubernetes/ingress`](./kubernetes/ingress) 
 <summary>📖 <strong>Tutorial: How I set up the Kubernetes cluster on Proxmox</strong></summary>
 
 <br>
-
+Before starting, you need to have downloaded ubuntu 22.04, added ssh, username, password and given it enough RAM to function.
 ### Step 1 — Install QEMU Guest Agent (all nodes)
 
 Allows Proxmox to communicate properly with the VMs.
