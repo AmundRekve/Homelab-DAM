@@ -1,6 +1,6 @@
 # 🏠 Homelab-DAM
 
-> A personal homelab running on three physical machines — a Proxmox cluster with Kubernetes on top. Everything is a work in progress, continuously expanded and improved over time.
+> A personal homelab running on three physical machines, a Proxmox cluster with Kubernetes on top. Everything is a work in progress, continuously expanded and improved over time.
 
 ---
 
