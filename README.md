@@ -100,41 +100,89 @@ Configuration can be found in the [`/kubernetes/ingress`](./kubernetes/ingress) 
 
 ---
 
-Step 1 — Install QEMU Guest Agent (all nodes)
+<details>
+<summary>📖 <strong>Tutorial: How I set up the Kubernetes cluster on Proxmox</strong></summary>
+
+<br>
+
+### Step 1 — Install QEMU Guest Agent (all nodes)
+
 Allows Proxmox to communicate properly with the VMs.
-bashsudo apt install qemu-guest-agent
+
+```bash
+sudo apt install qemu-guest-agent
+```
+
 Then reboot all nodes so that static IPs are applied.
 
-Step 2 — Prepare all nodes
+---
+
+### Step 2 — Prepare all nodes
+
 Find the IP address of each node before proceeding.
-Update the system and install containerd:
-bashsudo apt update && sudo apt dist-upgrade
+
+**Update the system and install containerd:**
+
+```bash
+sudo apt update && sudo apt dist-upgrade
 sudo apt install containerd
 sudo mkdir /etc/containerd
 containerd config default | sudo tee /etc/containerd/config.toml
-Enable SystemdCgroup in the containerd config:
-bashsudo nano /etc/containerd/config.toml
-Find the line SystemdCgroup = false and change it to:
+```
+
+**Enable SystemdCgroup in the containerd config:**
+
+```bash
+sudo nano /etc/containerd/config.toml
+```
+
+Find the line `SystemdCgroup = false` and change it to:
 SystemdCgroup = true
 
-Step 3 — Disable swap (all nodes)
+---
+
+### Step 3 — Disable swap (all nodes)
+
 Kubernetes requires swap to be off.
-bashsudo swapoff -a
+
+```bash
+sudo swapoff -a
+```
+
 To make it permanent, open the sysctl config:
-bashsudo nano /etc/sysctl.conf
+
+```bash
+sudo nano /etc/sysctl.conf
+```
+
 Uncomment the following line:
 net.ipv4.ip_forward=1
 
-Step 4 — Enable br_netfilter (all nodes)
+---
+
+### Step 4 — Enable br_netfilter (all nodes)
+
 This kernel module is required for Kubernetes networking.
-bashsudo nano /etc/modules-load.d/k8s.conf
+
+```bash
+sudo nano /etc/modules-load.d/k8s.conf
+```
+
 Add the following line:
 br_netfilter
-Then reboot:
-bashsudo reboot
 
-Step 5 — Install Kubernetes tools (all nodes)
-bashsudo apt update
+Then reboot:
+
+```bash
+sudo reboot
+```
+
+---
+
+### Step 5 — Install Kubernetes tools (all nodes)
+
+```bash
+sudo apt update
 sudo apt install -y apt-transport-https ca-certificates curl
 
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | \
@@ -147,27 +195,44 @@ echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] \
 sudo apt update
 sudo apt install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
+```
 
-apt-mark hold prevents Kubernetes tools from being accidentally upgraded, which could break the cluster.
+> `apt-mark hold` prevents Kubernetes tools from being accidentally upgraded, which could break the cluster.
 
+---
 
-Step 6 — Initialize the cluster (controller node only)
-Replace <ip-controller> and <controller-name> with your actual values.
-bashsudo kubeadm init \
+### Step 6 — Initialize the cluster (controller node only)
+
+Replace `<ip-controller>` and `<controller-name>` with your actual values.
+
+```bash
+sudo kubeadm init \
   --control-plane-endpoint=<ip-controller> \
   --node-name <controller-name> \
   --pod-network-cidr=10.244.0.0/16
-Set up kubectl access for your user:
-bashmkdir -p $HOME/.kube
+```
+
+**Set up kubectl access for your user:**
+
+```bash
+mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
-Install Flannel as the pod network:
-bashkubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
+```
 
-Step 7 — Join worker nodes
-After kubeadm init completes, it will print a kubeadm join command. Run that command on each worker node to add it to the cluster.
+**Install Flannel as the pod network:**
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
+```
+
+---
+
+### Step 7 — Join worker nodes
+
+After `kubeadm init` completes, it will print a `kubeadm join` command. Run that command on each worker node to add it to the cluster.
+
 </details>
-
 
 ## 📌 Notes
 
