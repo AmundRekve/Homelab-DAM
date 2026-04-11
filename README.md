@@ -10,9 +10,9 @@
 
 | Node | CPU | RAM | Storage (/) | Role |
 |------|-----|-----|-------------|------|
-| `pve` | Intel Core i5-6500 @ 3.20GHz (4 cores) | 15.51 GiB | 188.86 GiB | Primary — K8s controller host |
-| `pve02` | Intel Core i5-6500 @ 3.20GHz (4 cores) | 31.24 GiB | 69.18 GiB | Secondary — K8s worker host |
-| `pve03` | Intel Core i5-5200U @ 2.20GHz (4 cores) | 5.71 GiB | 95.94 GiB | Tertiary — K8s worker host |
+| `pve` | Intel Core i5-6500 @ 3.20GHz (4 cores) | 16 GiB | 200 GiB | Primary — K8s controller host |
+| `pve02` | Intel Core i5-6500 @ 3.20GHz (4 cores) | 32 GiB | 2200 GiB | Secondary — K8s worker host |
+| `pve03` | Intel Core i5-5200U @ 2.20GHz (4 cores) | 6 GiB | 500 GiB | Tertiary — K8s worker host |
 
 ### Software Stack
 
@@ -20,7 +20,7 @@
 |-----------|---------|
 | Hypervisor | Proxmox VE 9.1.7 |
 | Kernel | Linux 6.17.13-2-pve (pve / pve02), 6.14.8-2-pve (pve03) |
-| Orchestration | Kubernetes (1 controller + 8 worker nodes) |
+| Orchestration | Kubernetes (1 controller + 5 worker nodes) |
 | Distributed Storage | Longhorn |
 | Load Balancer | MetalLB (bare-metal LoadBalancer) |
 | Ingress | NGINX Ingress Controller |
@@ -40,7 +40,7 @@ All Kubernetes pod configurations can be found in the [`/kubernetes`](./kubernet
 | 101 | pulse | LXC | Monitoring (Pulse) |
 | 200 | K8s-ctrl | VM | Kubernetes controller node |
 | 201 | K8s-node-1 | VM | Kubernetes worker node |
-| 850 | K8s-node-clone | VM | Kubernetes worker node |
+| 850 | K8s-node-clone | VM | Kubernetes worker node clone |
 
 ### Node: `pve02`
 
@@ -49,18 +49,24 @@ All Kubernetes pod configurations can be found in the [`/kubernetes`](./kubernet
 | 203 | K8s-node-2 | VM | Kubernetes worker node |
 | 204 | K8s-node-3 | VM | Kubernetes worker node |
 | 205 | K8s-node-4 | VM | Kubernetes worker node |
-| 103 | K8s-node-clone | VM | Kubernetes worker node |
+| 103 | K8s-node-clone | VM | Kubernetes worker node clone |
 
 ### Node: `pve03`
 
 | VM ID | Name | Type | Role |
 |-------|------|------|------|
 | 210 | K8s-node-5 | VM | Kubernetes worker node |
-| 102 | K8s-node-clone | VM | Kubernetes worker node |
+| 102 | K8s-node-clone | VM | Kubernetes worker node clone |
 
 ---
 
 ## ⚙️ Services
+
+☸️ Kubernetes
+A self-hosted Kubernetes cluster managed through Proxmox, consisting of one controller node and eight worker nodes spread across all three physical hosts. The cluster is the backbone of the homelab and runs the majority of all services.
+The cluster is set up using kubeadm with a dedicated controller VM and worker nodes provisioned as Proxmox VMs. Storage is handled by Longhorn, load balancing by MetalLB, and external traffic routing by the NGINX Ingress Controller.
+
+📖 Tutorial: A step-by-step guide on how I set up the Kubernetes cluster on Proxmox including VM provisioning, kubeadm initialization, joining worker nodes, and installing core components will be added here.
 
 ### 🌐 Homepage
 A custom homelab dashboard running on Kubernetes. Provides a unified entry point to all services, displaying live system stats (CPU, RAM), quick-launch tiles for each service, and useful external links.
@@ -82,6 +88,12 @@ A self-hosted workout management application for planning, scheduling, and track
 Pod configuration can be found in the [`/kubernetes/wger`](./kubernetes/wger) directory.
 
 ---
+### 🐄 Longhorn
+A cloud-native distributed block storage system for Kubernetes. Provides persistent storage for all stateful workloads in the cluster with built-in replication across nodes, snapshots, and backup support.
+
+Pod configuration can be found in the [`/kubernetes/longhorn`](./kubernetes/longhorn) directory.
+
+---
 
 ### 📊 Pulse
 A lightweight monitoring tool used to keep an eye on the health of containers and VMs running outside the Kubernetes cluster. Provides an at-a-glance overview of resource usage, uptime, and service status — complementing the Kubernetes Dashboard for infrastructure not directly managed by Kubernetes.
@@ -94,13 +106,6 @@ Runs as a standalone LXC container on `pve`.
 A modern, lightweight VPN that allows secure remote access to the homelab from anywhere. Used to tunnel into the home network when away, giving full access to all internal services as if on the local network.
 
 Runs as a standalone LXC container on `pve`, outside of Kubernetes, for maximum reliability.
-
----
-
-### 🐄 Longhorn
-A cloud-native distributed block storage system for Kubernetes. Provides persistent storage for all stateful workloads in the cluster with built-in replication across nodes, snapshots, and backup support.
-
-Pod configuration can be found in the [`/kubernetes/longhorn`](./kubernetes/longhorn) directory.
 
 ---
 
