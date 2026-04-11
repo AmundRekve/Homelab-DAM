@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: postgres
-  namespace: nextcloud
+  namespace: wger
 spec:
   selector:
     app: postgres
@@ -12,11 +12,23 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nextcloud
-  namespace: nextcloud
+  name: redis
+  namespace: wger
 spec:
   selector:
-    app: nextcloud
+    app: redis
+  ports:
+    - port: 6379
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wger
+  namespace: wger
+spec:
+  selector:
+    app: wger
   type: LoadBalancer
   ports:
     - port: 80
+      targetPort: 80
