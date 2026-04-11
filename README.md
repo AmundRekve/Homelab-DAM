@@ -30,36 +30,6 @@ All Kubernetes pod configurations can be found in the [`/kubernetes`](./kubernet
 
 ---
 
-## 🖥️ Virtual Machines & Containers
-
-### Node: `pve`
-
-| VM ID | Name | Type | Role |
-|-------|------|------|------|
-| 100 | wireguard | LXC | WireGuard VPN gateway |
-| 101 | pulse | LXC | Monitoring (Pulse) |
-| 200 | K8s-ctrl | VM | Kubernetes controller node |
-| 201 | K8s-node-1 | VM | Kubernetes worker node |
-| 850 | K8s-node-clone | VM | Kubernetes worker node clone |
-
-### Node: `pve02`
-
-| VM ID | Name | Type | Role |
-|-------|------|------|------|
-| 203 | K8s-node-2 | VM | Kubernetes worker node |
-| 204 | K8s-node-3 | VM | Kubernetes worker node |
-| 205 | K8s-node-4 | VM | Kubernetes worker node |
-| 103 | K8s-node-clone | VM | Kubernetes worker node clone |
-
-### Node: `pve03`
-
-| VM ID | Name | Type | Role |
-|-------|------|------|------|
-| 210 | K8s-node-5 | VM | Kubernetes worker node |
-| 102 | K8s-node-clone | VM | Kubernetes worker node clone |
-
----
-
 ## ⚙️ Services
 
 ☸️ Kubernetes
@@ -127,26 +97,7 @@ Configuration can be found in the [`/kubernetes/ingress`](./kubernetes/ingress) 
 
 ---
 
-## 📁 Repository Structure
-
-```
-.
-├── kubernetes/
-│   ├── homepage/
-│   ├── nextcloud/
-│   ├── wger/
-│   ├── longhorn/
-│   ├── metallb/
-│   └── ingress/
-└── README.md
-```
-
----
-
 ## 📌 Notes
 
-- All three Proxmox nodes form a cluster with quorum enabled (`Homelab` datacenter).
-- The Kubernetes cluster consists of 1 controller node and 8 worker nodes spread across all three Proxmox hosts.
-- MetalLB + NGINX Ingress Controller handles all external service exposure within the home network.
 - WireGuard and Pulse run as LXC containers directly on Proxmox for reliability and low overhead.
 - All nodes run Proxmox VE with the non-production repository enabled for latest updates.
