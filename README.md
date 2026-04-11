@@ -50,7 +50,7 @@ Pod configuration can be found in the [`/kubernetes/homepage`](./kubernetes/home
 ---
 
 ### ☁️ Nextcloud
-A fully self-hosted cloud storage and file synchronization platform — a private alternative to Dropbox. Used to sync files between phone and home computer without relying on any third-party cloud provider. Also supports contacts, calendars, notes, and photo backups.
+A fully self-hosted cloud storage and file synchronization platform, a private alternative to Dropbox. Used to sync files between phone and home computer without relying on any third-party cloud provider. Also supports contacts, calendars, notes, and photo backups.
 
 Pod configuration can be found in the [`/kubernetes/nextcloud`](./kubernetes/nextcloud) directory.
 
