@@ -65,6 +65,7 @@ All Kubernetes pod configurations can be found in the [`/kubernetes`](./kubernet
 ☸️ Kubernetes
 A self-hosted Kubernetes cluster managed through Proxmox, consisting of one controller node and eight worker nodes spread across all three physical hosts. The cluster is the backbone of the homelab and runs the majority of all services.
 The cluster is set up using kubeadm with a dedicated controller VM and worker nodes provisioned as Proxmox VMs. Storage is handled by Longhorn, load balancing by MetalLB, and external traffic routing by the NGINX Ingress Controller.
+<img width="1656" height="317" alt="image" src="https://github.com/user-attachments/assets/6b98cb24-876c-4aed-a923-1c531bf15782" />
 
 >📖 Tutorial: A step-by-step guide on how I set up the Kubernetes cluster on Proxmox including VM provisioning, kubeadm initialization, joining worker nodes, and installing core components will be added here.
 
@@ -92,6 +93,7 @@ Pod configuration can be found in the [`/kubernetes/wger`](./kubernetes/wger) di
 ---
 ### 🐄 Longhorn
 A cloud-native distributed block storage system for Kubernetes. Provides persistent storage for all stateful workloads in the cluster with built-in replication across nodes, snapshots, and backup support.
+<img width="1500" height="300" alt="image" src="https://github.com/user-attachments/assets/c56dcbbf-2b8a-4d10-8e34-585896547fe0" />
 
 Pod configuration can be found in the [`/kubernetes/longhorn`](./kubernetes/longhorn) directory.
 
