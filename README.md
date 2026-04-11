@@ -43,6 +43,7 @@ The cluster is set up using kubeadm with a dedicated controller VM and worker no
 
 ### 🌐 Homepage
 A custom homelab dashboard running on Kubernetes. Provides a unified entry point to all services, displaying live system stats (CPU, RAM), quick-launch tiles for each service, and useful external links.
+<img width="1813" height="586" alt="image" src="https://github.com/user-attachments/assets/966cb9b3-6f0e-4e4c-9cfe-303c3d02e9f3" />
 
 Pod configuration can be found in the [`/kubernetes/homepage`](./kubernetes/homepage) directory.
 
