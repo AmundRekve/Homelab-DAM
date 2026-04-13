@@ -37,6 +37,7 @@ All Kubernetes pod configurations can be found in the [`/kubernetes`](./kubernet
 ### ☸️ Kubernetes
 A self-hosted Kubernetes cluster managed through Proxmox, consisting of one controller node and eight worker nodes spread across all three physical hosts. The cluster is the backbone of the homelab and runs the majority of all services.
 The cluster is set up using kubeadm with a dedicated controller VM and worker nodes provisioned as Proxmox VMs. Storage is handled by Longhorn, load balancing by MetalLB, and external traffic routing by the NGINX Ingress Controller.
+
 <img width="1656" height="317" alt="image" src="https://github.com/user-attachments/assets/6b98cb24-876c-4aed-a923-1c531bf15782" />
 
 >📖 Tutorial: A step-by-step guide on how I set up the Kubernetes cluster on Proxmox including VM provisioning, kubeadm initialization, joining worker nodes, and installing core components will be added here.
@@ -45,6 +46,7 @@ The cluster is set up using kubeadm with a dedicated controller VM and worker no
 
 ### 🌐 Homepage
 A custom homelab dashboard running on Kubernetes. Provides a unified entry point to all services, displaying live system stats (CPU, RAM), quick-launch tiles for each service, and useful external links.
+
 <img width="1813" height="586" alt="image" src="https://github.com/user-attachments/assets/966cb9b3-6f0e-4e4c-9cfe-303c3d02e9f3" />
 
 Pod configuration can be found in the [`/kubernetes/homepage`](./kubernetes/homepage) directory.
