@@ -96,8 +96,6 @@ Configuration can be found in the [`/kubernetes/metallb`](./kubernetes/metallb) 
 ### 🔀 NGINX Ingress Controller
 Manages external HTTP/HTTPS access to services running inside the Kubernetes cluster. Works in tandem with MetalLB to route traffic from the local network to the correct pods based on hostname and path rules.
 
-Configuration can be found in the [`/kubernetes/ingress`](./kubernetes/ingress) directory.
-
 ---
 
 <details>
