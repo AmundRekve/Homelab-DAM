@@ -14,7 +14,6 @@
 | `pve02` | Intel Core i5-6500 @ 3.20GHz (4 cores) | 32 GiB | 2200 GiB | Secondary — K8s worker host |
 | `pve03` | Intel Core i5-5200U @ 2.20GHz (4 cores) | 6 GiB | 500 GiB | Tertiary — K8s worker host |
 
-<img width="828" height="975" alt="image" src="https://github.com/user-attachments/assets/298eebb6-9a0b-4423-8473-a4d4872b0c5c" />
 
 ### Software Stack
 
