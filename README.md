@@ -48,28 +48,28 @@ A custom homelab dashboard running on Kubernetes. Provides a unified entry point
 
 <img width="1813" height="586" alt="image" src="https://github.com/user-attachments/assets/966cb9b3-6f0e-4e4c-9cfe-303c3d02e9f3" />
 
-Pod configuration can be found in the [`/kubernetes/homepage`](./kubernetes/homepage) directory.
+Pod configuration can be found in the [`/kubernetes/homepage`](./kubernetes/Homepage) directory.
 
 ---
 
 ### ☁️ Nextcloud
 A fully self-hosted cloud storage and file synchronization platform, a private alternative to Dropbox. Used to sync files between phone and home computer without relying on any third-party cloud provider. Also supports contacts, calendars, notes, and photo backups.
 
-Pod configuration can be found in the [`/kubernetes/nextcloud`](./kubernetes/nextcloud) directory.
+Pod configuration can be found in the [`/kubernetes/nextcloud`](./kubernetes/Nextcloud) directory.
 
 ---
 
 ### 💪 Wger
 A self-hosted workout management application for planning, scheduling, and tracking training sessions. Full gym log with support for custom exercise definitions, workout routines, training calendars, and progress tracking. Full data ownership with no subscription required.
 
-Pod configuration can be found in the [`/kubernetes/wger`](./kubernetes/wger) directory.
+Pod configuration can be found in the [`/kubernetes/wger`](./kubernetes/Wger) directory.
 
 ---
 ### 🐄 Longhorn
 A cloud-native distributed block storage system for Kubernetes. Provides persistent storage for all stateful workloads in the cluster with built-in replication across nodes, snapshots, and backup support.
+
 <img width="1500" height="300" alt="image" src="https://github.com/user-attachments/assets/c56dcbbf-2b8a-4d10-8e34-585896547fe0" />
 
-Pod configuration can be found in the [`/kubernetes/longhorn`](./kubernetes/longhorn) directory.
 
 ---
 
