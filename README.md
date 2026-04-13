@@ -1,6 +1,6 @@
 # 🏠 Homelab-DAM
 
-> A personal homelab running on three physical machines, a Proxmox cluster with Kubernetes on top. Everything is a work in progress, continuously expanded and improved over time.
+> A personal homelab running on three physical machines, a Proxmox cluster with Kubernetes on top. Everything is a work in progress, continuously expanded and improved over time. Image of the physical homelab is at the bottom of the document.
 
 ---
 
@@ -240,3 +240,4 @@ After `kubeadm init` completes, it will print a `kubeadm join` command. Run that
 
 - WireGuard and Pulse run as LXC containers directly on Proxmox for reliability and low overhead.
 - All nodes run Proxmox VE with the non-production repository enabled for latest updates.
+- Image of the physical homelab: <img width="828" height="975" alt="image" src="https://github.com/user-attachments/assets/298eebb6-9a0b-4423-8473-a4d4872b0c5c" />
