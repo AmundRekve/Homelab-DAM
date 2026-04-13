@@ -34,7 +34,7 @@ All Kubernetes pod configurations can be found in the [`/kubernetes`](./kubernet
 
 ## ⚙️ Services
 
-☸️ Kubernetes
+### ☸️ Kubernetes
 A self-hosted Kubernetes cluster managed through Proxmox, consisting of one controller node and eight worker nodes spread across all three physical hosts. The cluster is the backbone of the homelab and runs the majority of all services.
 The cluster is set up using kubeadm with a dedicated controller VM and worker nodes provisioned as Proxmox VMs. Storage is handled by Longhorn, load balancing by MetalLB, and external traffic routing by the NGINX Ingress Controller.
 <img width="1656" height="317" alt="image" src="https://github.com/user-attachments/assets/6b98cb24-876c-4aed-a923-1c531bf15782" />
