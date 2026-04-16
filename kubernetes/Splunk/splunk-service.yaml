@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: splunk
+  namespace: splunk
+spec:
+  selector:
+    app: splunk
+  type: LoadBalancer
+  ports:
+    # Splunk Web UI
+    - name: web
+      port: 8000
+      targetPort: 8000
+    # HTTP Event Collector (HEC) — for structured log ingestion
+    - name: hec
+      port: 8088
+      targetPort: 8088
+    # Splunk management port
+    - name: mgmt
+      port: 8089
+      targetPort: 8089
+---
+# Separate service for syslog UDP — LoadBalancer with UDP
+apiVersion: v1
+kind: Service
+metadata:
+  name: splunk-syslog
+  namespace: splunk
+spec:
+  selector:
+    app: splunk
+  type: LoadBalancer
+  ports:
+    - name: syslog-udp
+      port: 514
+      targetPort: 514
+      protocol: UDP

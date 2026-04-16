@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: splunk
+  namespace: splunk
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: splunk
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: splunk
+    spec:
+      containers:
+        - name: splunk
+          image: splunk/splunk:latest
+          env:
+            - name: SPLUNK_START_ARGS
+              value: "--accept-license"
+            - name: SPLUNK_GENERAL_TERMS
+              value: "--accept-sgt-current-at-splunk-com"
+            - name: SPLUNK_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: splunk-secret
+                  key: SPLUNK_PASSWORD
+            - name: SPLUNK_LICENSE_URI
+              value: "Free"
+            # Allow syslog ingestion from router on UDP 514
+            - name: SPLUNK_ADD
+              value: "udp 514"
+          ports:
+            - name: web
+              containerPort: 8000
+            - name: hec
+              containerPort: 8088
+            - name: syslog-udp
+              containerPort: 514
+              protocol: UDP
+            - name: mgmt
+              containerPort: 8089
+          resources:
+            requests:
+              cpu: "1"
+              memory: "2Gi"
+            limits:
+              cpu: "2"
+              memory: "4Gi"
+          volumeMounts:
+            - name: splunk-etc
+              mountPath: /opt/splunk/etc
+            - name: splunk-var
+              mountPath: /opt/splunk/var
+          readinessProbe:
+            httpGet:
+              path: /en-US/account/login
+              port: 8000
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /en-US/account/login
+              port: 8000
+            initialDelaySeconds: 90
+            periodSeconds: 30
+            failureThreshold: 5
+      volumes:
+        - name: splunk-etc
+          persistentVolumeClaim:
+            claimName: splunk-etc-pvc
+        - name: splunk-var
+          persistentVolumeClaim:
+            claimName: splunk-var-pvc
